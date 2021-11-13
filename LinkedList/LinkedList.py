@@ -26,7 +26,7 @@ class LinkedList(object):
         newNode.next = self.head
         self.head = newNode
     
-    def remove(self, data: Any) -> None:
+    #def remove(self, data: Any) -> None:
 
 if __name__ == '__main__':
     l =LinkedList()
