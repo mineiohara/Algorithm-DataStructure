@@ -1,4 +1,5 @@
 from __future__ import annotations
+from os import pread
 from typing import Any, Optional
 
 
@@ -60,27 +61,56 @@ class DoublyLinkedList(object):
         currentNode = None
 
     def reverseIterative(self) -> None:
-        priviousNode = self.head
-        currentNode = priviousNode.next
-        priviousNode.next = None
+        previousNode = None
+        currentNode = self.head
 
         while currentNode:
-            nextNode = currentNode.next
-            currentNode.next = priviousNode
-            priviousNode.prev = currentNode
-            priviousNode = currentNode
-            currentNode = nextNode
-        
-        self.head = priviousNode
+            previousNode = currentNode.prev
+            currentNode.prev = currentNode.next
+            currentNode.next = previousNode
 
+            currentNode = currentNode.prev
+        
+        if previousNode:
+            self.head = previousNode.prev
+
+    def reverseRecursive(self) -> None:
+        def _reverseRecursive_(currentNode: Node) -> Optional[Node]:
+            if currentNode is None: return None
+
+            previousNode = currentNode.prev
+            currentNode.prev = currentNode.next
+            currentNode.next = previousNode
+
+            if currentNode.prev is None:
+                return currentNode
+            
+            return _reverseRecursive_(currentNode.prev)
+        
+        self.head = _reverseRecursive_(self.head)
     
+    def bubbleSort(self) -> None:
+        if self.head is None: return
+
+        currentNode = self.head
+
+        while currentNode.next:
+            nextNode = currentNode.next
+            while nextNode:
+                if currentNode.data > nextNode.data:
+                    currentNode.data, nextNode.data = nextNode.data, currentNode.data
+
+                nextNode = nextNode.next
+
+            currentNode = currentNode.next
 
 
 if __name__ == "__main__":
     d = DoublyLinkedList()
-    d.append(1)
+    d.append(5)
     d.append(2)
-    d.insert(0)
-    d.remove(5)
-    d.reverseIterative()
+    d.insert(3)
+    d.reverseRecursive()
+    d.reverseRecursive()
+    d.bubbleSort()
     d.print()
