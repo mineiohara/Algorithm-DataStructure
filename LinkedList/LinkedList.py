@@ -96,9 +96,6 @@ class LinkedList(object):
                 
         self.head = _reverseEven_(self.head, None)
         
-    
-
-
 
 if __name__ == "__main__":
     l = LinkedList()
