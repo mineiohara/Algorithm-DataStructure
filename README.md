@@ -1,5 +1,5 @@
 # Algorithm and DataStructure
-Learn Algorithm and Data structure on Python3.
+Important Algorithm and Data structure with Python3.
 
 ・Sort  
 ・Linked list  
