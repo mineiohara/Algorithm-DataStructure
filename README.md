@@ -1,4 +1,4 @@
-# Algorithm　and DataStructure
+# Algorithm and DataStructure
 Learn Algorithm and Data structure on Python3.
 
 ・Sort  
