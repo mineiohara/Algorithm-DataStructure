@@ -15,6 +15,7 @@ def partition(nums: List[int], low: int, high: int) -> int:
 
     return i+1
 
+
 def quickSort(nums: List[int]) -> List[int]:
     def _quickSort_(nums: List[int], low: int, high: int) -> None:
         if low < high:
