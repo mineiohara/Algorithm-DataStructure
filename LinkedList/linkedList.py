@@ -1,8 +1,8 @@
-# Linked list
+# Linked List
 
 from __future__ import annotations
 from hashlib import new
-from typing import Any
+from typing import Any, Optional
 
 class Node(object):
     def __init__(self, data: Any, next: Node = None) -> None:
@@ -26,9 +26,8 @@ class LinkedList(object):
         currentNode.next = newNode
     
     def print(self) -> None:
-        if self.head is None: return
-
         currentNode = self.head
+        if currentNode is None: return
 
         while currentNode:
             print(currentNode.data, end=" ")
@@ -49,6 +48,7 @@ class LinkedList(object):
         currentNode = self.head
         if currentNode and currentNode.data == data:
             self.head = currentNode.next
+            currentNode = None
             return
 
         previousNode = currentNode
@@ -60,6 +60,49 @@ class LinkedList(object):
             previousNode = currentNode
             currentNode = currentNode.next
         
+    def reverseIterative(self) -> None:
+        previousNode = None
+        currentNode = self.head
+
+        while currentNode:
+            nextNode = currentNode.next
+            currentNode.next = previousNode
+            previousNode = currentNode
+            currentNode = nextNode
+        
+        self.head = previousNode
+
+    def reverseRecursive(self) -> None:
+        def _reverseRecursive_(currentNode: Node, prevNode: Node) -> Node:
+            if currentNode is None: return prevNode
+
+            nextNode = currentNode.next
+            currentNode.next = prevNode
+
+            return _reverseRecursive_(nextNode, currentNode)
+        
+        self.head = _reverseRecursive_(self.head, None)
+
+    def reverseEven(self) -> None:
+        def _reverseEven_(head: Node, prevNode: Node) -> Optional[Node]:
+            if head is None: return None
+
+            currentNode = head
+            while currentNode and currentNode.data % 2 == 0:
+                nextNode = currentNode.next
+                currentNode.next = prevNode
+                prevNode = currentNode
+                currentNode = nextNode
+            
+            if currentNode != head:
+                head.next = currentNode
+                _reverseEven_(currentNode, None)
+                return prevNode
+            else:
+                head.next = _reverseEven_(head.next, head)
+                return head
+        
+        self.head = _reverseEven_(self.head, None)
                 
 
     
@@ -75,4 +118,7 @@ if __name__ == "__main__":
     l.insert(7)
     l.remove(7)
     l.remove(6)
+    l.print()
+    l.reverseIterative()
+    l.reverseRecursive()
     l.print()
