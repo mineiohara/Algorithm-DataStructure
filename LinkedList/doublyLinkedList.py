@@ -1,11 +1,7 @@
 # Doubly Linked List
 
 from __future__ import annotations
-from dataclasses import dataclass
-from hashlib import new
 from typing import Any, Optional
-
-from numpy import cumprod
 
 class Node(object):
     def __init__(self, data: Any, prev: Node = None, next: Node = None) -> None:
